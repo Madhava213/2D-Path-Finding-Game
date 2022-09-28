@@ -262,8 +262,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1117840445
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4d613e57742908b4e8a1d28af9795781, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -284,7 +284,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084567134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 7.84}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6529e011fe8656418b2bdc44159b114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Puff: {fileID: 3296288291289247211, guid: 045a7f00229c1f744b10aa46db25c672, type: 3}
+  Agent: {fileID: 2410454705588499338, guid: 5bf9392de5d57594abd4fafef9136654, type: 3}
   Node: {fileID: 8406401833406623415, guid: 4fa7021619a610f4a9264d059fc54586, type: 3}
   Obstacle: {fileID: 8001948830855614720, guid: ca52cd3a4ac79ff42ae9fd968376df94, type: 3}
 --- !u!4 &2061424472
@@ -331,7 +331,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2061424470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.71666056, y: 0.09461446, z: -0.042456895}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

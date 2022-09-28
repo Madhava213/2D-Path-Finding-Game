@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Node
   - Obstacle
-  - Puff
   layers:
   - Default
   - TransparentFX
@@ -14,7 +13,7 @@ TagManager:
   - Objects
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 
@@ -41,6 +40,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Objects
+    uniqueID: 3177126851
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

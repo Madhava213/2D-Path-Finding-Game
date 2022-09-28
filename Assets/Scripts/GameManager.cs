@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject Puff;
+    public GameObject Agent;
     public GameObject Node;
     public GameObject Obstacle;
 
@@ -14,26 +14,27 @@ public class GameManager : MonoBehaviour
 
     // Quantities
     private int numObstacles = 10;
-    private int numNodes = 10;
+    private int numNodes = 5;
 
     // Start is called before the first frame update
     void Start()
     {
         numObstacles = Random.Range(20, 25);
-        numNodes = Random.Range(15, 20);
+        // numNodes = Random.Range(15, 20);
 
         // Generate Sprites
         for (int i = 0; i < numObstacles; i++)
         {
             Vector2 obstaclePos = new Vector2(Random.Range(xPosRange.x, xPosRange.y), Random.Range(yPosRange.x, yPosRange.y));
-            Instantiate(Obstacle,obstaclePos, Quaternion.identity);
+            GameObject obstacleObj = Instantiate(Obstacle,obstaclePos, Quaternion.identity);
         }
 
         for (int i = 0; i < numNodes; i++)
         {
             Vector2 nodePos = new Vector2(Random.Range(xPosRange.x, xPosRange.y),Random.Range(yPosRange.x,yPosRange.y));
-            Instantiate(Node,nodePos, Quaternion.identity);
+            GameObject nodeObj = Instantiate(Node,nodePos, Quaternion.identity);
         }
+        Instantiate(Agent,new Vector2(0.0f,0.0f), Quaternion.identity);
     }
 
     // Update is called once per frame
