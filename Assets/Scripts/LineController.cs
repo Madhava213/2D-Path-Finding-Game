@@ -5,9 +5,9 @@ using UnityEngine;
 public class LineController : MonoBehaviour
 {
     [SerializeField] private LineRenderer lr;
-    public Transform[] points;
+    public GameObject[] points;
 
-    public void addPoints(Transform[] pts){
+    public void addPoints(GameObject[] pts){
         lr.positionCount = pts.Length;
         this.points = pts;
     }
@@ -17,7 +17,7 @@ public class LineController : MonoBehaviour
     {
         for (int i = 0; i < points.Length; i++)
         {
-            lr.SetPosition(i, points[i].position);
+            lr.SetPosition(i, points[i].transform.position);
         }
     }
 }

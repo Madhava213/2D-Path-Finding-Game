@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject Obstacle;
 
     // Ranges
-    private Vector2 xPosRange = new Vector2(-10.5f,10.5f);
+    private Vector2 xPosRange = new Vector2(-8.5f,8.5f);
     private Vector2 yPosRange = new Vector2(-4.5f,4.5f);
 
     // Quantities
@@ -20,19 +20,21 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         numObstacles = Random.Range(20, 25);
-        // numNodes = Random.Range(15, 20);
+        numNodes = Random.Range(15, 20);
 
         // Generate Sprites
         for (int i = 0; i < numObstacles; i++)
         {
             Vector2 obstaclePos = new Vector2(Random.Range(xPosRange.x, xPosRange.y), Random.Range(yPosRange.x, yPosRange.y));
             GameObject obstacleObj = Instantiate(Obstacle,obstaclePos, Quaternion.identity);
+            obstacleObj.name = "Obstacle " + i;
         }
 
         for (int i = 0; i < numNodes; i++)
         {
             Vector2 nodePos = new Vector2(Random.Range(xPosRange.x, xPosRange.y),Random.Range(yPosRange.x,yPosRange.y));
             GameObject nodeObj = Instantiate(Node,nodePos, Quaternion.identity);
+            nodeObj.name = "Node " + i;
         }
         Instantiate(Agent,new Vector2(0.0f,0.0f), Quaternion.identity);
     }
@@ -41,5 +43,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Reset(){
+
     }
 }

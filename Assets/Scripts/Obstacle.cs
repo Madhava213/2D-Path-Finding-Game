@@ -5,7 +5,7 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     // Ranges
-    private Vector2 xPosRange = new Vector2(-10.5f,10.5f);
+    private Vector2 xPosRange = new Vector2(-8.5f,8.5f);
     private Vector2 yPosRange = new Vector2(-4.5f,4.5f);
 
     // Start is called before the first frame update

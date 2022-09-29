@@ -7,16 +7,15 @@ public class Node : MonoBehaviour
     [SerializeField] private LineController line;
     public LayerMask mask;
     // Ranges
-    private Vector2 xPosRange = new Vector2(-10.5f,10.5f);
+    private Vector2 xPosRange = new Vector2(-8.5f,8.5f);
     private Vector2 yPosRange = new Vector2(-4.5f,4.5f);
-    private Dictionary<GameObject,LineController> lineConnected = new Dictionary<GameObject,LineController>();
-
-    // public Dictionary<GameObject,LineController> connected;
+    private Dictionary<string,bool> connected = new Dictionary<string,bool>();
 
     // Update is called once per frame
     void Update()
     {
         GameObject[] allNodes = GameObject.FindGameObjectsWithTag("Node");
+        GameObject[] allLines = GameObject.FindGameObjectsWithTag("Line");
         foreach (GameObject item in allNodes)
         {
             Vector3 destination = item.transform.position - transform.position;
@@ -25,19 +24,23 @@ public class Node : MonoBehaviour
                 // Debug.DrawLine(transform.position,new Vector3(nodeCast.point.x,nodeCast.point.y,0.0f),Color.red,5);
                 // Debug.DrawLine(transform.position, destination,Color.blue,5);
                 if(nodeCast.collider != null && nodeCast.collider.gameObject.CompareTag("Obstacle")){
-                    if(lineConnected != null && lineConnected.ContainsKey(item) && item.gameObject.GetComponent<Node>().lineConnected.ContainsKey(this.gameObject)){
-                        GameObject.Destroy(lineConnected[item]);
-                        item.gameObject.GetComponent<Node>().lineConnected.Remove(this.gameObject);
-                        lineConnected.Remove(item);
+                    foreach (GameObject line in allLines){
+                        if((line.GetComponent<LineController>().points[0] == this.gameObject && line.GetComponent<LineController>().points[1] == item)
+                        || (line.GetComponent<LineController>().points[0] == item && line.GetComponent<LineController>().points[1] == this.gameObject)
+                        ){
+                            GameObject.Destroy(line);
+                            connected[item.gameObject.name] = false;
+                        }
                     }
+                    // }
                 }
                 else if (nodeCast.collider != null && nodeCast.collider.gameObject.CompareTag("Node"))
                 {
-                    if(lineConnected == null || (!lineConnected.ContainsKey(item) && !item.gameObject.GetComponent<Node>().lineConnected.ContainsKey(this.gameObject))){
-                        line.addPoints(new Transform[2] { this.transform, item.transform });
+                    if(!connected.ContainsKey(item.gameObject.name) || !connected[item.gameObject.name]){
+                        line.addPoints(new GameObject[2] { this.gameObject, item });
                         LineController newLine = Instantiate(line, transform.position, Quaternion.identity);
-                        lineConnected.Add(item, newLine);
-                        item.gameObject.GetComponent<Node>().lineConnected.Add(this.gameObject, newLine);
+                        newLine.name = this.gameObject.name + " to " + item.name;
+                        connected[item.gameObject.name] = true;
                     }
                 }
             }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2264548113808747265}
   m_Layer: 3
   m_Name: LineRenderer
-  m_TagString: Untagged
+  m_TagString: Line
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,7 +85,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.05833453
+        value: 0.03928393
         inSlope: 0
         outSlope: 0
         tangentMode: 0
