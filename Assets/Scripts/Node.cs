@@ -11,6 +11,12 @@ public class Node : MonoBehaviour
     private Vector2 yPosRange = new Vector2(-4.5f,4.5f);
     private Dictionary<string,bool> connected = new Dictionary<string,bool>();
 
+    private List<Vector3[]> edges = new List<Vector3[]>();
+    private List<Vector3> nodes = new List<Vector3>();
+    private int startId = 0;
+    private int goalId = 15;
+    public List<int> path = new List<int>();
+
     // Update is called once per frame
     void Update()
     {
@@ -18,6 +24,7 @@ public class Node : MonoBehaviour
         GameObject[] allLines = GameObject.FindGameObjectsWithTag("Line");
         foreach (GameObject item in allNodes)
         {
+            nodes.Add(item.transform.position);
             Vector3 destination = item.transform.position - transform.position;
             if(this.gameObject != item){
                 RaycastHit2D[] nodeCast = Physics2D.RaycastAll(transform.position,destination,destination.magnitude,mask);
@@ -46,6 +53,12 @@ public class Node : MonoBehaviour
                         LineController newLine = Instantiate(line, transform.position, Quaternion.identity);
                         newLine.name = this.gameObject.name + " to " + item.name;
                         connected[item.gameObject.name] = true;
+                        Vector3[] lineEndPoints =
+                        {
+                            this.gameObject.transform.position,
+                            item.gameObject.transform.position
+                        };
+                        edges.Add(lineEndPoints);
                     }
                 }
             }
