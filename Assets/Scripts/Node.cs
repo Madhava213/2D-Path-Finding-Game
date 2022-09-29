@@ -20,10 +20,16 @@ public class Node : MonoBehaviour
         {
             Vector3 destination = item.transform.position - transform.position;
             if(this.gameObject != item){
-                RaycastHit2D nodeCast = Physics2D.Raycast(transform.position,destination,20,mask);
-                // Debug.DrawLine(transform.position,new Vector3(nodeCast.point.x,nodeCast.point.y,0.0f),Color.red,5);
+                RaycastHit2D[] nodeCast = Physics2D.RaycastAll(transform.position,destination,destination.magnitude,mask);
                 // Debug.DrawLine(transform.position, destination,Color.blue,5);
-                if(nodeCast.collider != null && nodeCast.collider.gameObject.CompareTag("Obstacle")){
+                bool blocked = false;
+                foreach (RaycastHit2D ray in nodeCast){
+                    // Debug.DrawLine(transform.position,new Vector3(ray.point.x,ray.point.y,0.0f),Color.red,5);
+                    if(ray.collider.gameObject.CompareTag("Obstacle")){
+                        blocked = true;
+                    }
+                }
+                if(blocked){
                     foreach (GameObject line in allLines){
                         if((line.GetComponent<LineController>().points[0] == this.gameObject && line.GetComponent<LineController>().points[1] == item)
                         || (line.GetComponent<LineController>().points[0] == item && line.GetComponent<LineController>().points[1] == this.gameObject)
@@ -32,9 +38,8 @@ public class Node : MonoBehaviour
                             connected[item.gameObject.name] = false;
                         }
                     }
-                    // }
                 }
-                else if (nodeCast.collider != null && nodeCast.collider.gameObject.CompareTag("Node"))
+                else
                 {
                     if(!connected.ContainsKey(item.gameObject.name) || !connected[item.gameObject.name]){
                         line.addPoints(new GameObject[2] { this.gameObject, item });
