@@ -141,4 +141,8 @@ public class GameManager : MonoBehaviour
     public void SpawnObstacle(){
         GameObject obstacleObj = Instantiate(Obstacle,new Vector3(0,0,0), Quaternion.identity);
     }
+
+    public void Exit(){
+        Application.Quit();
+    }
 }

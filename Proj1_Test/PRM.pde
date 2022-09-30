@@ -1,3 +1,8 @@
+/////////////////////////////////////////////////////////////////////
+// Group: Madhava Raveendra & Viet Nguyen
+/////////////////////////////////////////////////////////////////////
+
+
 //You will only be turning in this file
 //Your solution will be graded based on it's runtime (smaller is better), 
 //the optimality of the path you return (shorter is better), and the
@@ -36,8 +41,6 @@
 // these and other issues as you work on this assignment. This file is
 // intended to illustrate the basic set-up for the assignmtent, don't assume 
 // this example funcationality is correct and end up copying it's mistakes!).
-
-// Group: Madhava Raveendra & Viet Nguyen
 
 //Here, we represent our graph structure as a neighbor list
 //You can use any graph representation you like
@@ -84,7 +87,7 @@ ArrayList<Integer> planPath(Vec2 startPos, Vec2 goalPos, Vec2[] centers, float[]
   if (!pointInCircleList(centers, radii, numObstacles, startPos, 2) && !pointInCircleList(centers, radii, numObstacles, goalPos, 2)) {
     int startID = closestNode(startPos, nodePos, numNodes, goalPos);
     int goalID = closestNode(goalPos, nodePos, numNodes, startPos);
-         println(startID + " " + goalID);
+         //println(startID + " " + goalID);
     if (startID == 0 || goalID == 0) {
  
       Vec2 dir = goalPos.minus(startPos).normalized();
@@ -123,7 +126,7 @@ ArrayList<Integer> runBFS(Vec2[] nodePos, int numNodes, int startID, int goalID)
     nodePos[numNodes - 2] = startPos;
     path.add(0, numNodes - 2);
     path.add(1, numNodes - 1);
-    println(path);
+    //println(path);
     return path;
   }
   //println("\nBeginning Search");
@@ -132,8 +135,8 @@ ArrayList<Integer> runBFS(Vec2[] nodePos, int numNodes, int startID, int goalID)
   fringe.add(startID);
   //println("Adding node", startID, "(start) to the fringe.");
   //println(" Current Fringe: ", fringe);
-  println(startID);
-  println("Goal: " + goalID);
+  //println(startID);
+  //println("Goal: " + goalID);
   while (fringe.size() > 0){
     int currentNode = fringe.get(0);
     fringe.remove(0);

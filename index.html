@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="business">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@2.31.0/dist/full.css"
+            rel="stylesheet" type="text/css" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="main.css">
+        <title>CSCI 5611</title>
+    </head>
+    <body>
+        <div class="flex justify-center py-10">
+            <h1 class="text-5xl">CSCI 5611 - Project 1</h1>
+            <h2 class="text-3xl">2D Path Finding Game - Astronaut A*</h2>
+        </div>
+        <div class="hero h-[30] bg-base-200">
+            <div class="flex hero-content flex-col text-center">
+                <div class="max-w-md">
+                    <h1 class="text-5xl font-bold">Authors</h1>
+                    <ul class="py-6">
+                        <li>
+                            Madhava Raveendra
+                        </li>
+                        <li>
+                            Viet Nguyen
+                        </li>
+                    </ul>
+                </div>
+                <div class="max-w-[90%]">
+                    <h1 class="text-5xl font-bold">Description</h1>
+                    <p class="py-6">
+                        A 2D game with green circle nodes and brown square
+                        obstacles. The player can press 'R' or use the UI button
+                        in the game to reset the level (second 2 in video),
+                        press 'E' to spawn an obstacle at the origin. The user
+                        can also drag the obstacle around. The game will
+                        automatically regenerate the path which has no collision
+                        with any obstacles (second 3 in video). The player then
+                        can left click on any nodes for the start node and right
+                        click for the end node. The agent will move along the
+                        path from start to end (second 7 in video). If the
+                        player moves the obstacle to collide with the path, the
+                        game will automatically generate new path and the agent
+                        can follow the new path (second 11 in video).
+                    </p>
+                </div>
+                <div class="max-w-[90%]">
+                    <h1 class="text-5xl font-bold">Features</h1>
+                    <p class="py-6">
+                        Single Agent Navigation
+                        - Improved Agent & Scene Rendering
+                        - Orientation Smoothing
+                        - User Scenario Editing
+                    </p>
+                </div>
+                <div class="max-w-[90%]">
+                    <h1 class="text-5xl font-bold">Code</h1>
+                    <p class="py-6">
+                        We are using Unity3D Game Engine for the implementation
+                        of this project. We are using Unity's 2D Collider and
+                        Collision Detection Systems along with its Raycasting
+                        Libraries for the calculation of gameObject interaction.
+                        We are using a modified A Star Algorithm based off of
+                        the pseudocode we found in the references mentioned
+                        below. We are also using the 2D character - Astronaut
+                        provided by COPYSPRITE for free on the Unity Asset store
+                        as well as a publicly available background image. All
+                        other assets are custom made.
+                    </p>
+                </div>
+                <div class="max-w-[90%]">
+                    <h1 class="text-5xl font-bold">Execution</h1>
+                    <p class="py-6">
+                        Use the button below to navigate to the source code.
+                        Find the 'Build' folder and run the executable inside.
+                    </p>
+                </div>
+                <button class="btn btn-primary w-[60%]"
+                    onclick="window.open('https://github.umn.edu/ravee006/CSCI-5611-Project-1');">Go
+                    To
+                    Source
+                    Code</button>
+                <div class="max-w-[90%]">
+                    <h1 class="text-5xl font-bold">Difficulties</h1>
+                    <p class="py-6">
+                        A\* implementation
+                        - Agent moving smoothly
+                        - Raycasting between obstacles, nodes, agent
+                    </p>
+                </div>
+                <div class="max-w-[90%]">
+                    <h1 class="text-5xl font-bold">Gallery</h1>
+                    <video class="my-10" width="600" height="520" controls>
+                        <source src="./PublicAssets/Video.mp4"
+                            type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <img src="./PublicAssets/Agent_Navigating.png" alt="Agent
+                        Navigation" width="600" height="520"/>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
