@@ -33,13 +33,14 @@ Find the 'Build' folder and run the executable inside.
 
 ## Video
 
-[![Astronaut A Star] // Title
-(url "/PublicAssets/Agent_Navigating.png")] // Thumbnail
-(url "/PublicAssets/Video.mp4")
+
+https://media.github.umn.edu/user/17151/files/09ec5967-f9b7-4895-b5ee-c9957ed38038
+
+
 
 ## Images
+<img width="624" alt="Agent_Navigating" src="https://media.github.umn.edu/user/17151/files/88fce01f-cb0f-4d42-ac27-fa4d38b69d09">
 
-![Agent Navigation](url "/PublicAssets/Agent_Navigating.png")
 
 ## References
 
