@@ -133,6 +133,8 @@ public class GameManager : MonoBehaviour
         {
             GameObject.Destroy(item);
         }
+        startNode = 0;
+        goalNode = 0;
         InstantiateScene();
     }
 
