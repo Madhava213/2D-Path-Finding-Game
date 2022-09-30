@@ -48,12 +48,12 @@ public class AStarAlgorithm : MonoBehaviour
                     parent[neighbor] = currentNodeId; // update parent list
                     gCost[neighbor] = potential_gCost;
                     fCost[neighbor] = gCost[neighbor] + hCost[neighbor];
+                    if (!open.Contains(neighbor))
+                    {
+                        open.Add(neighbor); // Add neighbor to open if not present
+                    }
                 }
 
-                if (!open.Contains(neighbor))
-                {
-                    open.Add(neighbor); // Add neighbor to open if not present
-                }
             }
         }
         return null; // if reaching the end of the while loop, no path has found

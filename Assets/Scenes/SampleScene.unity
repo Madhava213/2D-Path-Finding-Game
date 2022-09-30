@@ -738,9 +738,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2061424472}
   - component: {fileID: 2061424471}
+  - component: {fileID: 2061424473}
   m_Layer: 0
   m_Name: Game
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -760,6 +761,11 @@ MonoBehaviour:
   Agent: {fileID: 2410454705588499338, guid: 5bf9392de5d57594abd4fafef9136654, type: 3}
   Node: {fileID: 8406401833406623415, guid: 4fa7021619a610f4a9264d059fc54586, type: 3}
   Obstacle: {fileID: 8001948830855614720, guid: ca52cd3a4ac79ff42ae9fd968376df94, type: 3}
+  AStarAlgorithm: {fileID: 2061424473}
+  pathNodes: 
+  startNode: 0
+  goalNode: 0
+  pathChanged: 0
 --- !u!4 &2061424472
 Transform:
   m_ObjectHideFlags: 0
@@ -775,3 +781,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2061424473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061424470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5fb8f78edbe2f94f94937e6d5d0b2bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

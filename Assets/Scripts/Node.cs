@@ -11,16 +11,22 @@ public class Node : MonoBehaviour
     public bool goal;
 
     public bool path;
+    private GameObject[] allNodes;
+    private GameObject[] allLines;
     // Ranges
     private Vector2 xPosRange = new Vector2(-8.5f,8.5f);
     private Vector2 yPosRange = new Vector2(-4.5f,4.5f);
     private Dictionary<string,bool> connected = new Dictionary<string,bool>();
 
+    private void Start() {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager");
+    }
+
     // Update is called once per frame
     void Update()
     {
-        GameObject[] allNodes = GameObject.FindGameObjectsWithTag("Node");
-        GameObject[] allLines = GameObject.FindGameObjectsWithTag("Line");
+        allNodes = GameObject.FindGameObjectsWithTag("Node");
+        allLines = GameObject.FindGameObjectsWithTag("Line");
 
         if(Input.GetMouseButtonDown(0)){
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -37,6 +43,7 @@ public class Node : MonoBehaviour
                 goal = false;
                 start = true;
                 this.GetComponent<SpriteRenderer>().color = new Color(0.4823529f,1,1);
+                gameManager.GetComponent<GameManager>().pathChanged = true;
             }
         }
         else if(Input.GetMouseButtonDown(1)){
@@ -55,6 +62,7 @@ public class Node : MonoBehaviour
                 start = false;
                 goal = true;
                 this.GetComponent<SpriteRenderer>().color = new Color(1, 0.3176471f, 0);
+                gameManager.GetComponent<GameManager>().pathChanged = true;
             }
         }
 
@@ -62,11 +70,9 @@ public class Node : MonoBehaviour
         {
             Vector3 destination = item.transform.position - transform.position;
             if(this.gameObject != item){
-                RaycastHit2D[] nodeCast = Physics2D.RaycastAll(transform.position,destination,destination.magnitude,mask);
-                // Debug.DrawLine(transform.position, destination,Color.blue,5);
+                RaycastHit2D[] nodeCast = Physics2D.CircleCastAll(transform.position,0.3f,destination,destination.magnitude,mask);
                 bool blocked = false;
                 foreach (RaycastHit2D ray in nodeCast){
-                    // Debug.DrawLine(transform.position,new Vector3(ray.point.x,ray.point.y,0.0f),Color.red,5);
                     if(ray.collider.gameObject.CompareTag("Obstacle")){
                         blocked = true;
                     }
@@ -92,7 +98,6 @@ public class Node : MonoBehaviour
                 }
             }
         }
-        // Debug.Log(transform.position + " -+-+-+- " + nodeCast.point +  " ++++++++++++++ " + Vector2.up);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

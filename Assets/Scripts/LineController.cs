@@ -23,7 +23,7 @@ public class LineController : MonoBehaviour
         }
         if(points != null){
             if(points[0] != null && points[1] != null){
-                if(points[0].GetComponent<Node>().path && points[0].GetComponent<Node>().path){
+                if(points[0].GetComponent<Node>().path && points[1].GetComponent<Node>().path){
                     lr.colorGradient = pathGradient;
                 }
                 else{
