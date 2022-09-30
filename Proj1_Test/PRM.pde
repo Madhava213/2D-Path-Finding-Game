@@ -37,7 +37,7 @@
 // intended to illustrate the basic set-up for the assignmtent, don't assume 
 // this example funcationality is correct and end up copying it's mistakes!).
 
-
+// Group: Madhava Raveendra & Viet Nguyen
 
 //Here, we represent our graph structure as a neighbor list
 //You can use any graph representation you like
@@ -81,10 +81,19 @@ int closestNode(Vec2 point, Vec2[] nodePos, int numNodes, Vec2 oppositeEnd){
 ArrayList<Integer> planPath(Vec2 startPos, Vec2 goalPos, Vec2[] centers, float[] radii, int numObstacles, Vec2[] nodePos, int numNodes){
   ArrayList<Integer> path = new ArrayList();
   
-  int startID = closestNode(startPos, nodePos, numNodes, goalPos);
-  int goalID = closestNode(goalPos, nodePos, numNodes, startPos);
- 
   if (!pointInCircleList(centers, radii, numObstacles, startPos, 2) && !pointInCircleList(centers, radii, numObstacles, goalPos, 2)) {
+    int startID = closestNode(startPos, nodePos, numNodes, goalPos);
+    int goalID = closestNode(goalPos, nodePos, numNodes, startPos);
+         println(startID + " " + goalID);
+    if (startID == 0 || goalID == 0) {
+ 
+      Vec2 dir = goalPos.minus(startPos).normalized();
+      float distBetween = startPos.distanceTo(goalPos);
+      hitInfo circleListCheck = rayCircleListIntersect(centers, radii, numObstacles, startPos, dir, distBetween);
+      if(!circleListCheck.hit) {
+        return path = runBFS(nodePos, numNodes, startID, goalID);
+      }
+    }
     Vec2 goalDir = goalPos.minus(nodePos[goalID]).normalized();
     Vec2 startDir = startPos.minus(nodePos[startID]).normalized();
     float goalDistBetween = goalPos.distanceTo(nodePos[goalID]);
@@ -95,7 +104,7 @@ ArrayList<Integer> planPath(Vec2 startPos, Vec2 goalPos, Vec2[] centers, float[]
       return path = runBFS(nodePos, numNodes, startID, goalID);
     }
   }
-  path.add(-1);
+  path.add(0,-1);
   return path;
 }
 
@@ -107,14 +116,24 @@ ArrayList<Integer> runBFS(Vec2[] nodePos, int numNodes, int startID, int goalID)
     visited[i] = false;
     parent[i] = -1; //No parent yet
   }
-
+  
+  if (startID == 0 || goalID == 0) {
+    numNodes += 2;
+    nodePos[numNodes - 1] = goalPos;
+    nodePos[numNodes - 2] = startPos;
+    path.add(0, numNodes - 2);
+    path.add(1, numNodes - 1);
+    println(path);
+    return path;
+  }
   //println("\nBeginning Search");
   
   visited[startID] = true;
   fringe.add(startID);
   //println("Adding node", startID, "(start) to the fringe.");
   //println(" Current Fringe: ", fringe);
-  
+  println(startID);
+  println("Goal: " + goalID);
   while (fringe.size() > 0){
     int currentNode = fringe.get(0);
     fringe.remove(0);
@@ -134,9 +153,8 @@ ArrayList<Integer> runBFS(Vec2[] nodePos, int numNodes, int startID, int goalID)
     } 
   }
   
-  if (fringe.size() == 0){
-    //println("No Path");
-    path.add(0,-1);
+  if (fringe.size() == 0) { 
+    path.add(0, -1);
     return path;
   }
     
