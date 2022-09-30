@@ -83,9 +83,19 @@ ArrayList<Integer> planPath(Vec2 startPos, Vec2 goalPos, Vec2[] centers, float[]
   
   int startID = closestNode(startPos, nodePos, numNodes, goalPos);
   int goalID = closestNode(goalPos, nodePos, numNodes, startPos);
-  
-  path = runBFS(nodePos, numNodes, startID, goalID);
-  
+ 
+  if (!pointInCircleList(centers, radii, numObstacles, startPos, 2) && !pointInCircleList(centers, radii, numObstacles, goalPos, 2)) {
+    Vec2 goalDir = goalPos.minus(nodePos[goalID]).normalized();
+    Vec2 startDir = startPos.minus(nodePos[startID]).normalized();
+    float goalDistBetween = goalPos.distanceTo(nodePos[goalID]);
+    float startDistBetween = startPos.distanceTo(nodePos[startID]);
+    hitInfo circleListCheckGoal = rayCircleListIntersect(centers, radii, numObstacles, nodePos[goalID], goalDir, goalDistBetween);
+    hitInfo circleListCheckStart = rayCircleListIntersect(centers, radii, numObstacles, nodePos[startID], startDir, startDistBetween);
+    if(!circleListCheckStart.hit && !circleListCheckGoal.hit) {
+      return path = runBFS(nodePos, numNodes, startID, goalID);
+    }
+  }
+  path.add(-1);
   return path;
 }
 

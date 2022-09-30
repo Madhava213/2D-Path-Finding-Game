@@ -4,7 +4,7 @@
 //You must consider a point as colliding if it's distance is <= eps
 boolean pointInCircle(Vec2 center, float r, Vec2 pointPos, float eps){
   float dist = pointPos.distanceTo(center);
-  if (dist <= eps){ //small safety factor
+  if (dist <= r+eps){ //small safety factor
     return true;
   }
   return false;
