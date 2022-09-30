@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AStarAlgorithm
+public class AStarAlgorithm : MonoBehaviour
 {
-    public static List<int> AStar(int startNodeId, int destNodeId, List<Vector3> nodes, List<Vector3[]> edges)
+    public static List<int> AStar(int startNodeId, int destNodeId, List<Vector3> nodes, GameObject[] edges)
     {
         // g, h, f=g+hvalues
         List<float> gCost = new List<float>();
@@ -12,7 +12,6 @@ public class AStarAlgorithm
         List<float> fCost = new List<float>();
         List <int> open = new List<int>(); // Nodes queued up for searching
         List<int> parent = new List<int>(); // Parent of current node
-        List<int> closed = new List<int>(); // Nodes that have already been searched
         int currentNodeId = startNodeId; // Initialize the first node
 
 
@@ -106,11 +105,14 @@ public class AStarAlgorithm
         {
             List<int> neighbors = new List<int>();
 
-            foreach (Vector3[] edge in edges)
+            foreach(GameObject edge in edges)
             {
+                GameObject[] pointObj = edge.GetComponent<LineController>().points;
+                Vector3 pointStart = pointObj[0].transform.position;
+                Vector3 pointEnd = pointObj[1].transform.position;
                 // endpoints 1 & 2 of an edge
-                int p1 = nodes.FindIndex(p => p.x == edge[0].x && p.y == edge[0].y && p.z == edge[0].z);
-                int p2 = nodes.FindIndex(p => p.x == edge[1].x && p.y == edge[1].y && p.z == edge[1].z);
+                int p1 = nodes.FindIndex(p => p.x == pointStart.x && p.y == pointStart.y && p.z == pointStart.z);
+                int p2 = nodes.FindIndex(p => p.x == pointEnd.x && p.y == pointEnd.y && p.z == pointEnd.z);
 
                 if (current == p1) neighbors.Add(p2);
                 else if (current == p2) neighbors.Add(p1);

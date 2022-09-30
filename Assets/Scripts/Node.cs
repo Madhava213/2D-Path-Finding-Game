@@ -5,7 +5,12 @@ using UnityEngine;
 public class Node : MonoBehaviour
 {
     [SerializeField] private LineController line;
+    public GameObject gameManager;
     public LayerMask mask;
+    public bool start;
+    public bool goal;
+
+    public bool path;
     // Ranges
     private Vector2 xPosRange = new Vector2(-8.5f,8.5f);
     private Vector2 yPosRange = new Vector2(-4.5f,4.5f);
@@ -16,6 +21,43 @@ public class Node : MonoBehaviour
     {
         GameObject[] allNodes = GameObject.FindGameObjectsWithTag("Node");
         GameObject[] allLines = GameObject.FindGameObjectsWithTag("Line");
+
+        if(Input.GetMouseButtonDown(0)){
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.GetRayIntersection(ray,Mathf.Infinity);
+            if(hit.collider != null  && hit.collider.transform == this.transform)
+            {
+                // raycast hit this gameobject
+                foreach (GameObject item in allNodes){
+                    if(item.gameObject.GetComponent<Node>().start){
+                        item.gameObject.GetComponent<Node>().start = false;
+                        item.gameObject.GetComponent<SpriteRenderer>().color = new Color(1,1,1);
+                    }
+                }
+                goal = false;
+                start = true;
+                this.GetComponent<SpriteRenderer>().color = new Color(0.4823529f,1,1);
+            }
+        }
+        else if(Input.GetMouseButtonDown(1)){
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.GetRayIntersection(ray,Mathf.Infinity);
+            if(hit.collider != null  && hit.collider.transform == this.transform)
+            {
+                foreach (GameObject item in allNodes)
+                {
+                    if (item.gameObject.GetComponent<Node>().goal)
+                    {
+                        item.gameObject.GetComponent<Node>().goal = false;
+                        item.gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1);
+                    }
+                }
+                start = false;
+                goal = true;
+                this.GetComponent<SpriteRenderer>().color = new Color(1, 0.3176471f, 0);
+            }
+        }
+
         foreach (GameObject item in allNodes)
         {
             Vector3 destination = item.transform.position - transform.position;
